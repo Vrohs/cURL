@@ -8,13 +8,20 @@
     "dev": "node api/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["api", "gemini", "ai", "curl", "vercel"],
+  "keywords": [
+    "api",
+    "gemini",
+    "ai",
+    "curl",
+    "vercel"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "dotenv": "^16.5.0",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.5.0"
   },
   "engines": {
     "node": ">=18.x"

@@ -8,6 +8,14 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Validate that API key exists
+if (!process.env.GEMINI_API_KEY) {
+  console.error('GEMINI_API_KEY is not set. Please check your .env file');
+  if (process.env.NODE_ENV === 'production') {
+    process.exit(1);
+  }
+}
+
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 app.post('/api/generate', async (req, res) => {
@@ -38,6 +46,14 @@ app.post('/api/generate', async (req, res) => {
     if (error.message && error.message.includes('API key')) {
       return res.status(500).json({ 
         error: 'API key configuration error. Make sure GEMINI_API_KEY is set properly.'
+      });
+    }
+    
+    if (error.message && error.message.includes('429')) {
+      return res.status(429).json({
+        error: 'Rate limit exceeded',
+        message: 'The Gemini API quota has been exceeded. Please try again later.',
+        details: error.message
       });
     }
     

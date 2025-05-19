@@ -81,6 +81,20 @@ The API includes error handling for:
 - Missing prompts
 - API key configuration issues
 - Gemini API errors
+- Rate limit exceeded errors (429)
+
+## Rate Limits
+
+Gemini API has usage quotas and rate limits that vary based on your API key type:
+- Free tier keys have stricter limits
+- Paid API keys have higher quotas
+
+If you receive a 429 error, it means you've exceeded your current quota. Options to resolve:
+1. Wait and retry later
+2. Upgrade to a paid API key
+3. Implement rate limiting in your application
+
+For more details, visit [Google AI Studio's rate limits page](https://ai.google.dev/gemini-api/docs/rate-limits).
 
 ## License
 
